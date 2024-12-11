@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TheUncodedOneGame;
-
+public record AttackData(int Damage);
 public interface IAttack
 {
 	string Name { get; }
+	AttackData Create();
 }

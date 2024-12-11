@@ -9,5 +9,6 @@ namespace TheUncodedOneGame;
 public class Skeleton : Character
 { 
 	public override string Name => "SKELETON";
+	public Skeleton() : base(5) { }
 	public override IAttack DefaultAttack { get; } = new BoneCrunchAttack();
 }

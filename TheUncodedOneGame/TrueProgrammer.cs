@@ -10,6 +10,9 @@ public class TrueProgrammer : Character
 {
 	public override string Name {  get; }
 	public override IAttack DefaultAttack { get; } = new PunchAttack();
-	public TrueProgrammer(string name) => Name = name;
-
+	public TrueProgrammer(string name) : base(25)
+	{
+		Name = name;
+		HP = 25;
+	}
 }
