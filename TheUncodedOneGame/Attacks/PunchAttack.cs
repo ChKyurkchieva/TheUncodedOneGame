@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheUncodedOneGame;
+namespace TheUncodedOneGame.Attacks;
 
 public class PunchAttack : IAttack
 {
-	public string Name => "PUNCH";
-	public AttackData Create() => new AttackData(1);
+    public string Name => "PUNCH";
+    public AttackData Create() => new AttackData(1);
 }

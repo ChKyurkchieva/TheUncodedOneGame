@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheUncodedOneGame;
+namespace TheUncodedOneGame.Attacks;
 public record AttackData(int Damage);
 public interface IAttack
 {
-	string Name { get; }
-	AttackData Create();
+    string Name { get; }
+    AttackData Create();
 }

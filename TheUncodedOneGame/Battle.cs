@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheUncodedOneGame.Characters;
 
 namespace TheUncodedOneGame;
 
@@ -21,19 +22,43 @@ public class Battle
 		Heroes = heroes;
 		Monsters = monsters;
 	}
-	public void Run()
+
+	int HasWinner()
+	{
+		if (Heroes.Characters.Count == 0)
+		{
+			Console.WriteLine("You are defeated. The Uncoded One’s forces have prevailed.");
+			return 0;
+		}
+		if (Monsters.Characters.Count == 0)
+		{
+			Console.WriteLine("You win this battle!");
+			return 1;
+		}
+		return -1;
+	}
+	public int Run()
+	{
+		Process();
+		return HasWinner();
+	}
+
+	private void Process()
 	{
 		while (true)
 		{
-			foreach(Party party in new Party[]{Heroes, Monsters})
+			IEnumerable<(Party party, Character character)> partyCharacters = new Party[] { Heroes, Monsters }
+				.SelectMany(party => party.Characters.Select(character => (party, character)));
+			foreach ((Party party, Character character) in partyCharacters)
 			{
-				foreach (Character character in party.Characters)
-				{
-					Console.WriteLine($"It is {character.Name}'s turn...");
-					Thread.Sleep(500);
-					party.Player.ChooseAction(this, character).Run(this, character);
-					Console.WriteLine();
-				}
+				Console.WriteLine($"It is {character.Name}'s turn...");
+				Thread.Sleep(500);
+				party.Player.ChooseAction(this, character).Run(this, character);
+				Party enemy = GetEnemyPartyFor(character);
+				enemy.Characters.Where(ch => ch.HP == 0).ToList().ForEach(enemy.Remove);
+				Console.WriteLine();
+				if (Heroes.Characters.Count == 0 || Monsters.Characters.Count == 0)
+					return;
 			}
 		}
 	}
