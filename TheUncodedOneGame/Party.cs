@@ -16,6 +16,6 @@ public class Party
 	public void Remove(Character character)
 	{
 		if (Characters.Remove(character))
-			Console.WriteLine($"{character.Name} has been removed successfully!");
+			ConsoleDisplay.DisplayText($"\n{character.Name} has been removed successfully!\n", ConsoleColor.Yellow);
 	}
 }

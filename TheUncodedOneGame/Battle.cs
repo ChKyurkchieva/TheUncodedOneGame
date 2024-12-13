@@ -11,7 +11,6 @@ public class Battle
 {
 	private Party Heroes;
 	private Party Monsters;
-
 	internal Party GetEnemyPartyFor(Character character)
 	{
 		return Heroes.Characters.Contains(character) ? Monsters : Heroes;
@@ -27,12 +26,12 @@ public class Battle
 	{
 		if (Heroes.Characters.Count == 0)
 		{
-			Console.WriteLine("You are defeated. The Uncoded One’s forces have prevailed.");
+			ConsoleDisplay.DisplayText("\nYou are defeated. The Uncoded One’s forces have prevailed.\n", ConsoleColor.Red);
 			return 0;
 		}
 		if (Monsters.Characters.Count == 0)
 		{
-			Console.WriteLine("You win this battle!");
+			ConsoleDisplay.DisplayText("\nYou win this battle!\n\n", ConsoleColor.Green);
 			return 1;
 		}
 		return -1;
@@ -51,12 +50,12 @@ public class Battle
 				.SelectMany(party => party.Characters.Select(character => (party, character)));
 			foreach ((Party party, Character character) in partyCharacters)
 			{
-				Console.WriteLine($"It is {character.Name}'s turn...");
+				ConsoleDisplay.DisplayText($"It is {character.Name}'s turn...\n");
 				Thread.Sleep(500);
 				party.Player.ChooseAction(this, character).Run(this, character);
 				Party enemy = GetEnemyPartyFor(character);
 				enemy.Characters.Where(ch => ch.HP == 0).ToList().ForEach(enemy.Remove);
-				Console.WriteLine();
+				ConsoleDisplay.DisplayText("\n");
 				if (Heroes.Characters.Count == 0 || Monsters.Characters.Count == 0)
 					return;
 			}

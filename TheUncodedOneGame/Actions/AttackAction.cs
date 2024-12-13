@@ -15,9 +15,9 @@ public class AttackAction : IAction
     public void Run(Battle battle, Character character)
     {
         Character target = battle.GetEnemyPartyFor(character).Characters[new Random().Next(battle.GetEnemyPartyFor(character).Characters.Count)];
-        Console.WriteLine($"{character.Name} " + $"{_attack.Name} " + $"{target.Name}");
+        ConsoleDisplay.DisplayText($"{character.Name} " + $"{_attack.Name} " + $"{target.Name}\n", ConsoleColor.Magenta);
         AttackData data = _attack.Create();
         target.HP -= data.Damage;
-        Console.WriteLine($"{target.Name} is now at {target.HP}/{target.MaxHP} HP.");
+        ConsoleDisplay.DisplayText($"{target.Name} is now at {target.HP}/{target.MaxHP} HP.\n");
     }
 }

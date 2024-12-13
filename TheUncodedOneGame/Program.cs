@@ -2,19 +2,22 @@
 using TheUncodedOneGame.Characters;
 using TheUncodedOneGame.Players;
 
-Party heroes = new Party(new ComputerPlayer());
+
+
+Party heroes = new Party(new ComputerPlayer { });
 List<Party> monsterParties = new List<Party>();
-monsterParties.Add(new Party(new ComputerPlayer()));
+monsterParties.Add(new Party(new ComputerPlayer { }));
 monsterParties[0].Characters.Add(new Skeleton { });
-monsterParties.Add(new Party(new ComputerPlayer()));
+monsterParties.Add(new Party(new ComputerPlayer { }));
 monsterParties[1].Characters.Add(new Skeleton { });
 monsterParties[1].Characters.Add(new Skeleton { });
-monsterParties.Add(new Party(new ComputerPlayer()));
+monsterParties.Add(new Party(new ComputerPlayer{ }));
 monsterParties[2].Characters.Add(new TheUncodedOne { });
+
 string playerName;
 do
 {
-	Console.Write("Choose your name: ");
+	ConsoleDisplay.DisplayText("Choose your name: ", ConsoleColor.DarkCyan);
 	playerName = Console.ReadLine()!;
 	Console.Clear();
 } while (playerName == null);
@@ -22,12 +25,12 @@ do
 heroes.Characters.Add(new TrueProgrammer(playerName.ToUpper()));
 for (int i = 0; i < monsterParties.Count; i++)
 {
-	Console.WriteLine("New battle begins!\n");
+	ConsoleDisplay.DisplayText("New battle begins!\n", ConsoleColor.Blue);
 	Battle battle = new Battle(heroes, monsterParties[i]);
 	int result = battle.Run();
 	if (MonstersWin(result))
 	{
-		Console.WriteLine("Monsters and the Uncoded one win.");
+		ConsoleDisplay.DisplayText("Monsters and the Uncoded one win.", ConsoleColor.Red);
 		break;
 	}
 }
