@@ -15,4 +15,5 @@ public static class ConsoleDisplay
 		Console.Write(text);
 		Console.ForegroundColor = old;
 	}
+	public static void DisplayClear() => Console.Clear();
 }
