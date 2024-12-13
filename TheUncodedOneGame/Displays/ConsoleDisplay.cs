@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheUncodedOneGame;
+namespace TheUncodedOneGame.Displays;
 
-public static class ConsoleDisplay 
+public class ConsoleDisplay : IDisplay
 {
-	public static void DisplayText(string text, ConsoleColor color = ConsoleColor.White)
+	public void DisplayText(string text, ConsoleColor color = ConsoleColor.White)
 	{
 		ConsoleColor old = Console.ForegroundColor;
 		Console.ForegroundColor = color;
 		Console.Write(text);
 		Console.ForegroundColor = old;
 	}
-	public static void DisplayClear() => Console.Clear();
+	public void DisplayClear() => Console.Clear();
 }
