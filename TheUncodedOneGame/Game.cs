@@ -45,7 +45,7 @@ public class Game
 			Monsters = new List<Party>();
 			Monsters.Add(new Party(new HumanoidPlayer(_display), _display));
 			//add menu for chosing characters
-			Monsters[0].Characters.Add(new Skeleton { });
+			Monsters[0].Characters.Add(new Skeleton());
 			InitializePlayerName(Heroes);
 			return;	
 		}
@@ -57,12 +57,12 @@ public class Game
 
 		Monsters = new List<Party>();
 		Monsters.Add(new Party(new ComputerPlayer(_display), _display));
-		Monsters[0].Characters.Add(new Skeleton { });
+		Monsters[0].Characters.Add(new Skeleton());
 		Monsters.Add(new Party(new ComputerPlayer(_display), _display));
-		Monsters[1].Characters.Add(new Skeleton { });
-		Monsters[1].Characters.Add(new Skeleton { });
+		Monsters[1].Characters.Add(new Skeleton());
+		Monsters[1].Characters.Add(new Skeleton ());
 		Monsters.Add(new Party(new ComputerPlayer(_display), _display));
-		Monsters[2].Characters.Add(new TheUncodedOne { });
+		Monsters[2].Characters.Add(new TheUncodedOne());
 		InitializePlayerName(Heroes);
 	}
 	public Game()
