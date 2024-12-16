@@ -13,9 +13,10 @@ public class ComputerPlayer : IPlayer
 {
     private IDisplay _display;
     public ComputerPlayer(IDisplay display) => _display = display;
-    public IAction ChooseAction(Battle battle, Character character)
+    public IAction ChooseAction(Battle battle, Character character, int typeAction = 0)
     {
         Thread.Sleep(500);
-        return new AttackAction(character.DefaultAttack, _display);
+        IAction action = (typeAction == 0) ? new AttackAction(character.DefaultAttack, _display) : new DoNothingAction();
+        return action;
     }
 }

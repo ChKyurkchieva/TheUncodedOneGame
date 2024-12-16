@@ -13,16 +13,21 @@ public class Battle
 	private Party Heroes;
 	private Party Monsters;
 	private IDisplay _display;
+	private Mode _mode;
+
+	public Mode Mode { get => _mode; set => _mode = value; }
+
 	internal Party GetEnemyPartyFor(Character character)
 	{
 		return Heroes.Characters.Contains(character) ? Monsters : Heroes;
 	}
 
-	public Battle(Party heroes, Party monsters, IDisplay display)
+	public Battle(Party heroes, Party monsters, IDisplay display, Mode mode)
 	{
 		Heroes = heroes;
 		Monsters = monsters;
-		_display = display; 
+		_display = display;
+		_mode = mode;
 	}
 
 	int HasWinner()
@@ -44,6 +49,26 @@ public class Battle
 		Process();
 		return HasWinner();
 	}
+	private int GetTypeAction()
+	{
+		int result;
+		do
+		{
+			_display.DisplayText("0 -> Standard attack\n1 -> Do Nothing\n");
+			_display.DisplayText("What do you want to do? ");
+		} while (!Int32.TryParse(Console.ReadLine(), out result) && !(result == 0 || result == 1));
+		return result;
+	}
+	private void BattleModesMove(Party party, Character character, Mode mode)
+	{
+		if (mode == Mode.HumanVsHuman || (mode == Mode.HumanVsComputer && party == Heroes))
+		{
+			int typeAction = GetTypeAction();
+			party.Player.ChooseAction(this, character, typeAction).Run(this, character);
+			return;
+		}
+		party.Player.ChooseAction(this, character, 0).Run(this, character);
+	}
 
 	private void Process()
 	{
@@ -55,7 +80,7 @@ public class Battle
 			{
 				_display.DisplayText($"It is {character.Name}'s turn...\n");
 				Thread.Sleep(500);
-				party.Player.ChooseAction(this, character).Run(this, character);
+				BattleModesMove(party, character, Mode);
 				Party enemy = GetEnemyPartyFor(character);
 				enemy.Characters.Where(ch => ch.HP == 0).ToList().ForEach(enemy.Remove);
 				_display.DisplayText("\n");

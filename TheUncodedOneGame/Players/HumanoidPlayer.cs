@@ -13,9 +13,10 @@ public class HumanoidPlayer : IPlayer
 {
 	private IDisplay _display;
 	public HumanoidPlayer(IDisplay display) => _display = display;
-	public IAction ChooseAction(Battle battle, Character character)
+	public IAction ChooseAction(Battle battle, Character character, int typeAction)
 	{
 		Thread.Sleep(1000);
-		return new AttackAction(character.DefaultAttack, _display);
+		IAction action = (typeAction == 0 ) ? new AttackAction(character.DefaultAttack, _display) : new DoNothingAction();
+		return action;
 	}
 }
