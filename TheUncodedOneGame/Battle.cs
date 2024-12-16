@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using TheUncodedOneGame.Characters;
 using TheUncodedOneGame.Displays;
 
@@ -70,6 +71,17 @@ public class Battle
 		party.Player.ChooseAction(this, character, 0).Run(this, character);
 	}
 
+	private void PrintBattleStatus(Party party, Party enemy)
+	{
+		_display.DisplayText("==================================================BATTLE===============================================================\n");
+		foreach (Character ch in party.Characters)
+			_display.DisplayText($"{ch.Name}\t\t\t( {ch.HP}/{ch.MaxHP} )\n", ConsoleColor.Yellow);
+		_display.DisplayText("----------------------------------------------------VS-----------------------------------------------------------------\n");
+		foreach(Character ch in enemy.Characters)
+			_display.DisplayText($"{ch.Name}\t\t( {ch.HP}/{ch.MaxHP} )\n");
+		_display.DisplayText("=======================================================================================================================\n");
+	}
+
 	private void Process()
 	{
 		while (true)
@@ -80,8 +92,9 @@ public class Battle
 			{
 				_display.DisplayText($"It is {character.Name}'s turn...\n");
 				Thread.Sleep(500);
-				BattleModesMove(party, character, Mode);
 				Party enemy = GetEnemyPartyFor(character);
+				PrintBattleStatus(party, enemy);
+				BattleModesMove(party, character, Mode);
 				enemy.Characters.Where(ch => ch.HP == 0).ToList().ForEach(enemy.Remove);
 				_display.DisplayText("\n");
 				if (Heroes.Characters.Count == 0 || Monsters.Characters.Count == 0)
