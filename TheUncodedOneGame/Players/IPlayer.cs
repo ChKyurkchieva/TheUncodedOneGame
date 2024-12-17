@@ -10,5 +10,5 @@ namespace TheUncodedOneGame.Players;
 
 public interface IPlayer
 {
-    IAction ChooseAction(Battle battle, Character character);
+    IAction ChooseAction(Battle battle, Character character, int typeAction);
 }
