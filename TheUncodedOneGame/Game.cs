@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheUncodedOneContract.Interfaces;
 using TheUncodedOneGame.Characters;
 using TheUncodedOneGame.Displays;
 using TheUncodedOneGame.Players;

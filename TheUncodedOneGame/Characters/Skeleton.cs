@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheUncodedOneContract.Interfaces;
 using TheUncodedOneGame.Attacks;
 
 namespace TheUncodedOneGame.Characters;
 
-public class Skeleton : Character
+public class Skeleton : ICharacter
 {
-    public override string Name => "SKELETON";
-	public override IAttack DefaultAttack { get; } = new BoneCrunchAttack();
-	public Skeleton() : base(5) { }
-   
+	private int _hp;
+    public string Name => "SKELETON";
+	public IAttack DefaultAttack { get; } = new BoneCrunchAttack();
+	public int MaxHP {  get; }
+	public int HP { get => _hp; set => _hp = Math.Clamp(_hp, 0, MaxHP); }
+	public Skeleton() => HP = MaxHP = 5;
+	
 }

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheUncodedOneGame.Characters;
 
-namespace TheUncodedOneGame.Actions;
+namespace TheUncodedOneContract.Interfaces;
 
 public interface IAction
 {
-    void Run(Battle battle, Character character);
+    void Run(IBattle battle, ICharacter character);
 }
 

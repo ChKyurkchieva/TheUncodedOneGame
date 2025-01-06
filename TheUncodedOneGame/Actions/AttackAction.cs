@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheUncodedOneContract.Interfaces;
 using TheUncodedOneGame.Attacks;
 using TheUncodedOneGame.Characters;
 using TheUncodedOneGame.Displays;
@@ -18,9 +19,9 @@ public class AttackAction : IAction
         _attack = attack;
         _display = display;
     }
-    public void Run(Battle battle, Character character)
+    public void Run(IBattle battle, ICharacter character)
     {
-        Character target = battle.GetEnemyPartyFor(character).Characters[new Random().Next(battle.GetEnemyPartyFor(character).Characters.Count)];
+        ICharacter target = battle.GetEnemyPartyFor(character).Characters[new Random().Next(battle.GetEnemyPartyFor(character).Characters.Count)];
         _display.DisplayText($"{character.Name} " + $"{_attack.Name} " + $"{target.Name}\n");
         AttackData data = _attack.Create();
         target.HP -= data.Damage;

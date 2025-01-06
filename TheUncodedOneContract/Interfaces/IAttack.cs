@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheUncodedOneGame.Attacks;
+namespace TheUncodedOneContract.Interfaces;
 public record AttackData(int Damage);
 public interface IAttack
 {

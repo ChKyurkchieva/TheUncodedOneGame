@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using TheUncodedOneGame.Characters;
 using TheUncodedOneGame.Displays;
+using TheUncodedOneContract.Interfaces;
 
 namespace TheUncodedOneGame;
 
-public class Battle
+public class Battle : IBattle
 {
 	private Party Heroes;
 	private Party Monsters;
@@ -17,7 +18,7 @@ public class Battle
 	private Mode _mode;
 
 	public Mode Mode { get => _mode; set => _mode = value; }
-	internal Party GetEnemyPartyFor(Character character)
+	public IParty GetEnemyPartyFor(ICharacter character)
 	{
 		return Heroes.Characters.Contains(character) ? Monsters : Heroes;
 	}
@@ -52,7 +53,7 @@ public class Battle
 		} while (!Int32.TryParse(Console.ReadLine(), out result) || !(result == 0 || result == 1));
 		return result;
 	}
-	private void BattleModesMove(Party party, Character character, Mode mode)
+	private void BattleModesMove(Party party, ICharacter character, Mode mode)
 	{
 		if (mode == Mode.HumanVsHuman || (mode == Mode.HumanVsComputer && party == Heroes))
 		{
@@ -65,10 +66,10 @@ public class Battle
 	private void PrintBattleStatus(Party party, Party enemy)
 	{
 		_display.DisplayText("==================================================BATTLE===============================================================\n");
-		foreach (Character ch in party.Characters)
+		foreach (ICharacter ch in party.Characters)
 			_display.DisplayText($"{ch.Name}\t\t\t( {ch.HP}/{ch.MaxHP} )\n", ConsoleColor.Yellow);
 		_display.DisplayText("----------------------------------------------------VS-----------------------------------------------------------------\n");
-		foreach(Character ch in enemy.Characters)
+		foreach(ICharacter ch in enemy.Characters)
 			_display.DisplayText($"{ch.Name}\t\t( {ch.HP}/{ch.MaxHP} )\n");
 		_display.DisplayText("=======================================================================================================================\n");
 	}
@@ -76,13 +77,13 @@ public class Battle
 	{
 		while (true)
 		{
-			IEnumerable<(Party party, Character character)> partyCharacters = new Party[] { Heroes, Monsters }
+			IEnumerable<(Party party, ICharacter character)> partyCharacters = new Party[] { Heroes, Monsters }
 				.SelectMany(party => party.Characters.Select(character => (party, character)));
-			foreach ((Party party, Character character) in partyCharacters)
+			foreach ((Party party, ICharacter character) in partyCharacters)
 			{
 				_display.DisplayText($"It is {character.Name}'s turn...\n");
 				Thread.Sleep(500);
-				Party enemy = GetEnemyPartyFor(character);
+				Party enemy = (Party)GetEnemyPartyFor(character);
 				PrintBattleStatus(party, enemy);
 				BattleModesMove(party, character, Mode);
 				enemy.Characters.Where(ch => ch.HP == 0).ToList().ForEach(enemy.Remove);
