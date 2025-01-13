@@ -10,6 +10,6 @@ public class TheUncodedOneCharacter : ICharacter
 	public string Name => "THE UNCODED ONE";
 	public IAttack DefaultAttack { get; } = new UnravelingAttack();
 	public int MaxHP { get; }
-	public int HP {get => _hp; set => _hp = Math.Clamp(_hp, 0, MaxHP);}
+	public int HP {get => _hp; set => _hp = Math.Clamp(value, 0, MaxHP);}
 	public TheUncodedOneCharacter() => HP = MaxHP = 15;
 }
