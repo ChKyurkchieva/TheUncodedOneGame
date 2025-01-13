@@ -1,6 +1,6 @@
 ﻿using TheUncodedOne.Contract.Interfaces;
 
-namespace TheUncodedOneGame.Attacks;
+namespace TheUncodedOne.Game.Attacks;
 
 public class UnravelingAttack : IAttack
 {

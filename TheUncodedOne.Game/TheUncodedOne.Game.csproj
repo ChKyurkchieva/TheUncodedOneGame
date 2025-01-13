@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Actions\IAction.cs" />
-    <Compile Remove="Attacks\IAttack.cs" />
-    <Compile Remove="Displays\IDisplay.cs" />
-    <Compile Remove="Players\IPlayer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TheUncodedOne.Contract\TheUncodedOne.Contract.csproj" />
   </ItemGroup>
 

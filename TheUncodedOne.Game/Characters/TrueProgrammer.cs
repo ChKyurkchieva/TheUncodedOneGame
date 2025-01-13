@@ -1,8 +1,7 @@
-﻿
-using TheUncodedOne.Contract.Interfaces;
-using TheUncodedOneGame.Attacks;
+﻿using TheUncodedOne.Contract.Interfaces;
+using TheUncodedOne.Game.Attacks;
 
-namespace TheUncodedOneGame.Characters;
+namespace TheUncodedOne.Game.Characters;
 
 public class TrueProgrammer : ICharacter
 {
@@ -10,7 +9,7 @@ public class TrueProgrammer : ICharacter
     public string Name { get; }
     public IAttack DefaultAttack { get; } = new PunchAttack();
     public int MaxHP { get; }
-    public int HP { get => _hp; set => _hp = Math.Clamp(_hp, 0, MaxHP); }
+    public int HP { get => _hp; set => _hp = Math.Clamp(value, 0, MaxHP); }
     public TrueProgrammer(string name)
     {
         Name = name;

@@ -3,7 +3,7 @@ using TheUncodedOne.Game.Characters;
 using TheUncodedOne.Game.Displays;
 using TheUncodedOne.Game.Players;
 
-namespace TheUncodedOneGame;
+namespace TheUncodedOne.Game;
 
 public class Party : IParty
 {

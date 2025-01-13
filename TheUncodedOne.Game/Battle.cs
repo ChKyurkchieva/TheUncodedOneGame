@@ -1,5 +1,4 @@
-﻿
-using TheUncodedOne.Game.Characters;
+﻿using TheUncodedOne.Game.Characters;
 using TheUncodedOne.Game.Displays;
 using TheUncodedOne.Contract.Interfaces;
 

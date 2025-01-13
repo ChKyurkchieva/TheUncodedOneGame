@@ -1,9 +1,9 @@
 ﻿using TheUncodedOne.Contract.Interfaces;
-using TheUncodedOneGame.Actions;
-using TheUncodedOneGame.Characters;
-using TheUncodedOneGame.Displays;
+using TheUncodedOne.Game.Actions;
+using TheUncodedOne.Game.Characters;
+using TheUncodedOne.Game.Displays;
 
-namespace TheUncodedOneGame.Players;
+namespace TheUncodedOne.Game.Players;
 
 public class HumanoidPlayer : IPlayer
 {

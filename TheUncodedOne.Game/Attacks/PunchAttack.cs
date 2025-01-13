@@ -1,5 +1,5 @@
-﻿
-using TheUncodedOne.Contract.Interfaces;
+﻿using TheUncodedOne.Contract.Interfaces;
+
 namespace TheUncodedOne.Game.Attacks;
 
 public class PunchAttack : IAttack

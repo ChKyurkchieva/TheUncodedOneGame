@@ -3,7 +3,7 @@ using TheUncodedOne.Game.Actions;
 using TheUncodedOne.Game.Characters;
 using TheUncodedOne.Game.Displays;
 
-namespace TheUncodedOneGame.Players;
+namespace TheUncodedOne.Game.Players;
 
 public class ComputerPlayer : IPlayer
 {
