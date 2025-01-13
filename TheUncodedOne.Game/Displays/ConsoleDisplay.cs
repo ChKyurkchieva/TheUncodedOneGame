@@ -1,6 +1,6 @@
 ﻿using TheUncodedOne.Contract.Interfaces;
 
-namespace TheUncodedOneGame.Displays;
+namespace TheUncodedOne.Game.Displays;
 
 public class ConsoleDisplay : IDisplay
 {

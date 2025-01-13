@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUncodedOneGame", "TheUncodedOneGame\TheUncodedOneGame.csproj", "{049A28F2-6176-426A-B8DE-20EC90F92C99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUncodedOne.Contract", "TheUncodedOne.Contract\TheUncodedOne.Contract.csproj", "{E27D8B87-76F7-4239-B9BA-93A23ED730F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUncodedOneContract", "TheUncodedOneContract\TheUncodedOneContract.csproj", "{DB8864FD-D163-49F2-A4A3-E6BA841E1CAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUncodedOne.Inventory", "TheUncodedOne.Inventory\TheUncodedOne.Inventory.csproj", "{8FDD1C93-4947-43D6-B5FE-C91DCDE73CCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory", "Inventory\Inventory.csproj", "{2765408D-AD39-4313-B333-4EDBA2896339}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUncodedOne.Game", "TheUncodedOne.Game\TheUncodedOne.Game.csproj", "{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{049A28F2-6176-426A-B8DE-20EC90F92C99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{049A28F2-6176-426A-B8DE-20EC90F92C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{049A28F2-6176-426A-B8DE-20EC90F92C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{049A28F2-6176-426A-B8DE-20EC90F92C99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB8864FD-D163-49F2-A4A3-E6BA841E1CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB8864FD-D163-49F2-A4A3-E6BA841E1CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB8864FD-D163-49F2-A4A3-E6BA841E1CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB8864FD-D163-49F2-A4A3-E6BA841E1CAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2765408D-AD39-4313-B333-4EDBA2896339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2765408D-AD39-4313-B333-4EDBA2896339}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2765408D-AD39-4313-B333-4EDBA2896339}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2765408D-AD39-4313-B333-4EDBA2896339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E27D8B87-76F7-4239-B9BA-93A23ED730F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E27D8B87-76F7-4239-B9BA-93A23ED730F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E27D8B87-76F7-4239-B9BA-93A23ED730F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E27D8B87-76F7-4239-B9BA-93A23ED730F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FDD1C93-4947-43D6-B5FE-C91DCDE73CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FDD1C93-4947-43D6-B5FE-C91DCDE73CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FDD1C93-4947-43D6-B5FE-C91DCDE73CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FDD1C93-4947-43D6-B5FE-C91DCDE73CCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

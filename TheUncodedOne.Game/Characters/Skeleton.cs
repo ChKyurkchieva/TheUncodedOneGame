@@ -1,7 +1,8 @@
-﻿using TheUncodedOne.Contract.Interfaces;
-using TheUncodedOneGame.Attacks;
+﻿using System;
+using TheUncodedOne.Contract.Interfaces;
+using TheUncodedOne.Game.Attacks;
 
-namespace TheUncodedOneGame.Characters;
+namespace TheUncodedOne.Game.Characters;
 
 public class Skeleton : ICharacter
 {
@@ -11,5 +12,4 @@ public class Skeleton : ICharacter
 	public int MaxHP {  get; }
 	public int HP { get => _hp; set => _hp = Math.Clamp(_hp, 0, MaxHP); }
 	public Skeleton() => HP = MaxHP = 5;
-	
 }

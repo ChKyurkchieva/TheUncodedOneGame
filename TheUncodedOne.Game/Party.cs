@@ -1,9 +1,14 @@
-﻿using TheUncodedOne.Contract.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TheUncodedOne.Contract.Interfaces;
 using TheUncodedOne.Game.Characters;
 using TheUncodedOne.Game.Displays;
 using TheUncodedOne.Game.Players;
 
-namespace TheUncodedOneGame;
+namespace TheUncodedOne.Game;
 
 public class Party : IParty
 {

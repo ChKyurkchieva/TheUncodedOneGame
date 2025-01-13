@@ -1,8 +1,8 @@
-﻿
+﻿using System;
 using TheUncodedOne.Contract.Interfaces;
-using TheUncodedOneGame.Attacks;
+using TheUncodedOne.Game.Attacks;
 
-namespace TheUncodedOneGame.Characters;
+namespace TheUncodedOne.Game.Characters;
 
 public class TrueProgrammer : ICharacter
 {

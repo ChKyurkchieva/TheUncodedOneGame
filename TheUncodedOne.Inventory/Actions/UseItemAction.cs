@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheUncodedOneContract.Interfaces;
+﻿using TheUncodedOne.Contract.Interfaces;
 
-namespace Inventory.Actions;
+namespace ITheUncodedOne.Inventory.Actions;
 
 public class UseItemAction : IAction
 {

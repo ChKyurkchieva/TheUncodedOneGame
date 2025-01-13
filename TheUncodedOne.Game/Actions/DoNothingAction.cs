@@ -1,5 +1,5 @@
 ﻿using TheUncodedOne.Contract.Interfaces;
-using TheUncodedOneGame.Characters;
+using TheUncodedOne.Game.Characters;
 
 namespace TheUncodedOne.Game.Actions;
 
