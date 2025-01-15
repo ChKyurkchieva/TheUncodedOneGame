@@ -15,4 +15,8 @@
     <ProjectReference Include="..\TheUncodedOne.Contract\TheUncodedOne.Contract.csproj" />
   </ItemGroup>
 
+  <Target Name="CopyingDll" BeforeTargets="Compile">
+    <Exec Command="powershell.exe -NonInteractive -executionpolicy Unrestricted -command &quot;cd ..\;cp .\TheUncodedOne.Inventory\bin\Debug\net8.0\TheUncodedOne.Inventory.dll .\TheUncodedOne.Game\bin\Debug\net8.0\TheUncodedOne.Inventory.dll;cd .\TheUncodedOne.Game\;&quot;"/>
+  </Target>
+  
 </Project>
