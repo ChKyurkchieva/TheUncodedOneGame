@@ -41,7 +41,6 @@ public class Game
 		if (Mode == Mode.HumanVsHuman) 
 		{
 			Heroes = new Party(new HumanoidPlayer(_display), _display);
-			Monsters = new List<Party>();
 			Monsters.Add(new Party(new HumanoidPlayer(_display), _display));
 			InitializePlayerName(Heroes);
 			InitializePlayerName(Monsters[0]);
@@ -53,7 +52,6 @@ public class Game
 		else
 			Heroes = new Party(new ComputerPlayer(_display), _display);
 
-		Monsters = new List<Party>();
 		Monsters.Add(new Party(new ComputerPlayer(_display), _display));
 		Monsters[0].Characters.Add(new Skeleton());
 		Monsters.Add(new Party(new ComputerPlayer(_display), _display));
@@ -68,6 +66,7 @@ public class Game
 		_display = new ConsoleDisplay();
 		_input = new ConsoleInput();
 		GameMode();
+		Monsters = new List<Party>();
 		SetGameBattles();
 	}
 	public void Run()

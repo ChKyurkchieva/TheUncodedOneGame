@@ -10,11 +10,12 @@ public class Party : IParty
 	public IPlayer Player { get; }
 	public List<ICharacter> Characters { get; } = new List<ICharacter>();
 	private IDisplay _display;
-	public IDisplay Display { get ; init; }
+	public IDisplay Display { get; init; }
 	public Party(IPlayer player, IDisplay display)
 	{
 		_display = display;
 		Player = player;
+		Display = _display;
 	}
 
 	public void Remove(ICharacter character)
