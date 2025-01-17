@@ -36,7 +36,7 @@ public class MockInput : IInput
 		throw new ArgumentOutOfRangeException("Expected more input");
 	}
 }
-	public class Tests
+	public class BattlesTests
 {
 	[SetUp]
 	public void Setup()
