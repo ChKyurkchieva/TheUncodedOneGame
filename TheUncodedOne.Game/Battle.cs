@@ -17,7 +17,7 @@ public class Battle : IBattle
 	{
 		return Heroes.Characters.Contains(character) ? Monsters : Heroes;
 	}
-	public Battle(Party heroes, Party monsters, IDisplay display,IInput input, Mode mode)
+	public Battle(Party heroes, Party monsters, IDisplay display, IInput input, Mode mode)
 	{
 		Heroes = heroes;
 		Monsters = monsters;
