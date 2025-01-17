@@ -9,6 +9,7 @@ public class Battle : IBattle
 	private Party Heroes;
 	private Party Monsters;
 	private IDisplay _display;
+	private IInput _input;
 	private Mode _mode;
 
 	public Mode Mode { get => _mode; set => _mode = value; }
@@ -16,11 +17,12 @@ public class Battle : IBattle
 	{
 		return Heroes.Characters.Contains(character) ? Monsters : Heroes;
 	}
-	public Battle(Party heroes, Party monsters, IDisplay display, Mode mode)
+	public Battle(Party heroes, Party monsters, IDisplay display, IInput input, Mode mode)
 	{
 		Heroes = heroes;
 		Monsters = monsters;
 		_display = display;
+		_input = input;
 		_mode = mode;
 	}
 	private int HasWinner()
@@ -44,7 +46,7 @@ public class Battle : IBattle
 		{
 			_display.DisplayText("0 -> Standard attack\n1 -> Do Nothing\n");
 			_display.DisplayText("What do you want to do? ");
-		} while (!Int32.TryParse(Console.ReadLine(), out result) || !(result == 0 || result == 1));
+		} while (!Int32.TryParse(_input.ReadLine(), out result) || !(result == 0 || result == 1));
 		return result;
 	}
 	private void BattleModesMove(Party party, ICharacter character, Mode mode)

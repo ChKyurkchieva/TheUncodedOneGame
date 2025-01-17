@@ -7,6 +7,7 @@ public class UseItemAction : IAction
 	private readonly IItem _item;
 	private readonly IDisplay _display;
 
+	public UseItemAction() { }
 	public UseItemAction(IItem item, IDisplay display)
 	{
 		_item = item;

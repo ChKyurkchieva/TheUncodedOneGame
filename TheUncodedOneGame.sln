@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUncodedOne.Inventory", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUncodedOne.Game", "TheUncodedOne.Game\TheUncodedOne.Game.csproj", "{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheUncodedOne.Tests", "TheUncodedOne.Tests\TheUncodedOne.Tests.csproj", "{9FF716E8-5AA2-44AD-9F64-824E667A08EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11C3D1A1-7EC3-49AE-860A-49C27B125B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FF716E8-5AA2-44AD-9F64-824E667A08EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FF716E8-5AA2-44AD-9F64-824E667A08EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FF716E8-5AA2-44AD-9F64-824E667A08EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FF716E8-5AA2-44AD-9F64-824E667A08EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
