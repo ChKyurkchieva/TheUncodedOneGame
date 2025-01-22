@@ -65,12 +65,12 @@ public class Game
 	{
 		_display = new ConsoleDisplay();
 		_input = new ConsoleInput();
-		GameMode();
-		Monsters = new List<Party>();
-		SetGameBattles();
 	}
 	public void Run()
 	{
+		GameMode();
+		Monsters = new List<Party>();
+		SetGameBattles();
 		for (int i = 0; i < Monsters.Count; i++)
 		{
 			_display.DisplayText("New battle begins!\n", ConsoleColor.Blue);
