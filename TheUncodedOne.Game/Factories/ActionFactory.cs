@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Data;
 using System.Net.Http.Headers;
 using TheUncodedOne.Contract.Interfaces;
 using TheUncodedOne.Game.Actions;
@@ -6,24 +7,24 @@ using TheUncodedOne.Game.Actions;
 namespace TheUncodedOne.Game.Factories;
 public class ActionFactory
 {
-	public ActionFactory() { }
-	public IAction CreateAction(ServiceProvider provider, string actionType)
+	private IServiceProvider _provider = null!;
+	private List<string> _actionTypes;
+
+	//private readonly Func<DoNothingAction> _funcDoNothing;
+	//private readonly Func<UseItemAction> _
+	public ActionFactory(IServiceProvider provider, List<string> actionTypes)
 	{
-		var actions = provider.GetServices<IAction>();
+		_provider = provider;
+		_actionTypes = actionTypes;
+	} 
+	public IAction CreateAction(string actionType)
+	{
+		var actions = _provider.GetServices<IAction>();
 
 		var action = actions.FirstOrDefault(a => a.GetType().Name.Contains(actionType, StringComparison.OrdinalIgnoreCase));
-
-		if (action == null)
-		{
+		if (action == null) 
 			throw new InvalidOperationException($"No IAction implementation found for actionType: {actionType}");
-		}
 
 		return action;
-	}
-	public void DisplayActions(ServiceProvider provider)
-	{
-		var display = provider.GetService<IDisplay>();
-		var actions = provider.GetServices<IAction>().ToList();
-		actions.ForEach(x => display.DisplayText(x.ToString()));
 	}
 }

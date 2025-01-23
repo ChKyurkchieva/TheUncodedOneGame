@@ -13,7 +13,18 @@ public class Game
 	//private int GameMode { get; set; }
 	private readonly IDisplay _display;
 	private readonly IInput _input;
+	private readonly List<string> _actionTypes;
+	private readonly List<IAction> _actions;
 	private Mode Mode;
+
+	public Game(List<string> actionTypes, List<IAction> actions)
+	{
+		_display = new ConsoleDisplay();
+		_input = new ConsoleInput();
+		_actionTypes = actionTypes;
+		Monsters = new List<Party>();
+		_actions = actions;
+	}
 	private void InitializePlayerName(Party heroes)
 	{
 		string playerName;
@@ -21,7 +32,7 @@ public class Game
 		{
 			_display.DisplayText("Choose your name: ", ConsoleColor.DarkCyan);
 			playerName = _input.ReadLine()!;
-			_display.DisplayClear();
+			//_display.DisplayClear();
 		} while (playerName == null);
 		heroes.Characters.Add(new TrueProgrammer(playerName.ToUpper()));
 	}
@@ -40,41 +51,36 @@ public class Game
 	{
 		if (Mode == Mode.HumanVsHuman) 
 		{
-			Heroes = new Party(new HumanoidPlayer(_display), _display);
-			Monsters.Add(new Party(new HumanoidPlayer(_display), _display));
+			Heroes = new Party(new HumanoidPlayer(_display, _actions), _display);
+			Monsters.Add(new Party(new HumanoidPlayer(_display, _actions), _display));
 			InitializePlayerName(Heroes);
 			InitializePlayerName(Monsters[0]);
 			return;	
 		}
 		if (Mode == Mode.HumanVsComputer)
-			Heroes = new Party(new HumanoidPlayer(_display), _display);
+			Heroes = new Party(new HumanoidPlayer(_display, _actions), _display);
 
 		else
-			Heroes = new Party(new ComputerPlayer(_display), _display);
+			Heroes = new Party(new ComputerPlayer(_display, _actions), _display);
 
-		Monsters.Add(new Party(new ComputerPlayer(_display), _display));
+		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display));
 		Monsters[0].Characters.Add(new Skeleton());
-		Monsters.Add(new Party(new ComputerPlayer(_display), _display));
+		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display));
 		Monsters[1].Characters.Add(new Skeleton());
 		Monsters[1].Characters.Add(new Skeleton ());
-		Monsters.Add(new Party(new ComputerPlayer(_display), _display));
+		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display));
 		Monsters[2].Characters.Add(new TheUncodedOneCharacter());
 		InitializePlayerName(Heroes);
 	}
-	public Game()
-	{
-		_display = new ConsoleDisplay();
-		_input = new ConsoleInput();
-	}
+
 	public void Run()
 	{
 		GameMode();
-		Monsters = new List<Party>();
 		SetGameBattles();
 		for (int i = 0; i < Monsters.Count; i++)
 		{
 			_display.DisplayText("New battle begins!\n", ConsoleColor.Blue);
-			Battle battle = new Battle(Heroes, Monsters[i], _display, _input, Mode);
+			Battle battle = new Battle(Heroes, Monsters[i], _display, _input, Mode, _actionTypes);
 			int result = battle.Run();
 			if (MonstersWin(result))
 			{

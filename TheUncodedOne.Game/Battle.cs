@@ -6,10 +6,11 @@ namespace TheUncodedOne.Game;
 
 public class Battle : IBattle
 {
-	private Party Heroes;
-	private Party Monsters;
-	private IDisplay _display;
-	private IInput _input;
+	private Party Heroes { get; init; }
+	private Party Monsters { get; init; }
+	private readonly IDisplay _display;
+	private readonly IInput _input;
+	private readonly List<string> _actionTypes;
 	private Mode _mode;
 
 	public Mode Mode { get => _mode; set => _mode = value; }
@@ -17,13 +18,14 @@ public class Battle : IBattle
 	{
 		return Heroes.Characters.Contains(character) ? Monsters : Heroes;
 	}
-	public Battle(Party heroes, Party monsters, IDisplay display, IInput input, Mode mode)
+	public Battle(Party heroes, Party monsters, IDisplay display, IInput input, Mode mode, List<string> actionTypes)
 	{
 		Heroes = heroes;
 		Monsters = monsters;
 		_display = display;
 		_input = input;
 		_mode = mode;
+		_actionTypes = actionTypes;
 	}
 	private int HasWinner()
 	{
@@ -39,25 +41,33 @@ public class Battle : IBattle
 		}
 		return -1;
 	}
-	private int GetTypeAction()
+	private string GetTypeAction()
 	{
-		int result;
+		string? result;
 		do
 		{
-			_display.DisplayText("0 -> Standard attack\n1 -> Do Nothing\n");
-			_display.DisplayText("What do you want to do? ");
-		} while (!Int32.TryParse(_input.ReadLine(), out result) || !(result == 0 || result == 1));
+			_display.DisplayText("Choose action:\n", ConsoleColor.Yellow);
+			foreach (string s in _actionTypes)
+				_display.DisplayText($"\t{s}\n");
+			_display.DisplayText("Which action do you choose? ", ConsoleColor.Yellow);
+			result = _input.ReadLine();
+		}while(result == null && _actionTypes.Any(x => x != result));
+
 		return result;
+	}
+	private string DefaultTypeAction()
+	{
+		 return _actionTypes.FirstOrDefault()?.ToString();
 	}
 	private void BattleModesMove(Party party, ICharacter character, Mode mode)
 	{
 		if (mode == Mode.HumanVsHuman || (mode == Mode.HumanVsComputer && party == Heroes))
 		{
-			int typeAction = GetTypeAction();
-			party.Player.ChooseAction(this, character, typeAction).Run(this, character);
+			string actionType = GetTypeAction();
+			party.Player.ChooseAction(this, character, actionType).Run(this, character);
 			return;
 		}
-		party.Player.ChooseAction(this, character, 0).Run(this, character);
+		party.Player.ChooseAction(this, character, DefaultTypeAction()).Run(this, character);
 	}
 	private void PrintBattleStatus(Party party, Party enemy)
 	{

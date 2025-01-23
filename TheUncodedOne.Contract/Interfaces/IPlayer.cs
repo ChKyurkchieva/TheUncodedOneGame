@@ -2,5 +2,5 @@
 
 public interface IPlayer
 {
-    IAction ChooseAction(IBattle battle, ICharacter character, int typeAction);
+    IAction ChooseAction(IBattle battle, ICharacter character, string typeAction);
 }

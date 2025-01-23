@@ -16,10 +16,10 @@ public class ComputerPlayer : IPlayer
         _actions = actions;
 	}
 
-	public IAction ChooseAction(IBattle battle, ICharacter character, int typeAction = 0)
+	public IAction ChooseAction(IBattle battle, ICharacter character, string typeAction)
     {
         Thread.Sleep(500);
-        IAction action = (typeAction == 0) ? new AttackAction(character.DefaultAttack, _display) : new DoNothingAction(_display);
+        IAction action = _actions.Find(x => x.ToString().Contains(typeAction)) ?? throw new NullReferenceException($"There is no such type action as {typeAction}");
         return action;
     }
 }
