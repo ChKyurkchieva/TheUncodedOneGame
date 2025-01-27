@@ -21,19 +21,19 @@ internal class BuildServicesBootstrapper : IBootstrapper
 	{
 		Services = new ServiceCollection();
 		Services.AddSingleton<IDisplay, ConsoleDisplay>();
-		Services.AddSingleton<ConsoleInput>();
-		Services.AddSingleton<ActionFactory>();
-		Services.AddTransient<Skeleton>();
-		Services.AddTransient<TheUncodedOneCharacter>();
-		Services.AddTransient<TrueProgrammer>();
-		Services.AddSingleton<IAttack, BoneCrunchAttack>();
-		Services.AddSingleton<IAttack, PunchAttack>();
-		Services.AddSingleton<IAttack, UnravelingAttack>();
-		Services.AddSingleton<Func<IAction>, Func<AttackAction>>(ctx => ()=> new AttackAction(ctx.GetRequiredService<IAttack>(), ctx.GetRequiredService<IDisplay>()));
+		Services.AddSingleton<IInput, ConsoleInput>();
+		Services.AddSingleton<IActionFactory, ActionFactory>();
+		Services.AddTransient<ICharacter, Skeleton>();
+		Services.AddTransient<ICharacter, TheUncodedOneCharacter>();
+		Services.AddTransient<ICharacter, TrueProgrammer>();
+		Services.AddTransient<IAttack, BoneCrunchAttack>();
+		Services.AddTransient<IAttack, PunchAttack>();
+		Services.AddTransient<IAttack, UnravelingAttack>();
 		Services.AddTransient<IAction, AttackAction>();
-		Services.AddTransient<IAction,DoNothingAction>();
-		Services.AddTransient<ComputerPlayer>();
-		Services.AddTransient<HumanoidPlayer>();
+		Services.AddTransient<IAction, DoNothingAction>();
+		Services.AddTransient<IPlayer, ComputerPlayer>();
+		Services.AddTransient<IPlayer, HumanoidPlayer>();
+		Services.AddSingleton<IAttackFactory, AttackFactory>();
 		Services.AddTransient<List<IAction>>();
 		Services.AddSingleton<Game>();
 		

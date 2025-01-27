@@ -10,21 +10,17 @@ using System.Reflection;
 using TheUncodedOne.Game.Inputs;
 using TheUncodedOne.Game.Attacks;
 using TheUncodedOne.Game.Factories;
+using Microsoft.VisualBasic;
 
 BuildServicesBootstrapper services = new BuildServicesBootstrapper();
 services.RegisterServices(services.Services);
 var actionTypes = services.ImplementationTypes<IAction>();
+for(int i = 0; i < actionTypes.Count; i++)
+{
+	actionTypes[i] = actionTypes[i].Substring(0, actionTypes[i].Length - "Action".Length);
+}
 services.Services.AddSingleton(actionTypes);
-// List of actions
 var actionsImplementation = services.Services.Where(x => x.ServiceType == typeof(IAction)).Select(x => x.ImplementationType).ToList();
-//services.Services.AddSingleton(actionsImplementation);
 var serviceProvider = services.Services.BuildServiceProvider();
 var game = serviceProvider.GetRequiredService<Game>();
 game.Run();
-
-//public void DisplayActions(IServiceProvider provider)
-//{
-//	var display = provider.GetRequiredService<IDisplay>();
-//	var actions = provider.GetRequiredService<IEnumerable<IAction>>().ToList();
-//	actions.ForEach(x => display.DisplayText(x.ToString()));
-//}

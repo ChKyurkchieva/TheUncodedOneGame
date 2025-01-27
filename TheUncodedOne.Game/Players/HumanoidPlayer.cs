@@ -16,10 +16,9 @@ public class HumanoidPlayer : IPlayer
 		_display = display;
 		_actions = actions;
 	}
-	public IAction ChooseAction(IBattle battle, ICharacter character, string typeAction)
+	public IAction ChooseAction(IBattle battle, ICharacter character, IActionFactory actionFactory, string typeAction)
 	{
 		Thread.Sleep(1000);
-		IAction action = _actions.Find(x => x.ToString().Contains(typeAction)) ?? throw new NullReferenceException($"There is no such type action as {typeAction}");
-		return action;
+		return actionFactory.CreateAction(typeAction);
 	}
 }

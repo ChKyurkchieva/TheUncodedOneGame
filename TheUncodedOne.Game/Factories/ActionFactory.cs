@@ -5,13 +5,11 @@ using TheUncodedOne.Contract.Interfaces;
 using TheUncodedOne.Game.Actions;
 
 namespace TheUncodedOne.Game.Factories;
-public class ActionFactory
+public class ActionFactory : IActionFactory
 {
 	private IServiceProvider _provider = null!;
 	private List<string> _actionTypes;
 
-	//private readonly Func<DoNothingAction> _funcDoNothing;
-	//private readonly Func<UseItemAction> _
 	public ActionFactory(IServiceProvider provider, List<string> actionTypes)
 	{
 		_provider = provider;

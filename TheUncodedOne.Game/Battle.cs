@@ -11,14 +11,24 @@ public class Battle : IBattle
 	private readonly IDisplay _display;
 	private readonly IInput _input;
 	private readonly List<string> _actionTypes;
+	private readonly List<string> _attackTypes;
+	private readonly IActionFactory _actionFactory;
+	private readonly IAttackFactory _attackFactory;
 	private Mode _mode;
-
 	public Mode Mode { get => _mode; set => _mode = value; }
+	public BattleMode GetMode() => (BattleMode)_mode;
 	public IParty GetEnemyPartyFor(ICharacter character)
 	{
 		return Heroes.Characters.Contains(character) ? Monsters : Heroes;
 	}
-	public Battle(Party heroes, Party monsters, IDisplay display, IInput input, Mode mode, List<string> actionTypes)
+	public Battle(Party heroes,
+			Party monsters, 
+			IDisplay display,
+			IInput input, 
+			Mode mode, 
+			List<string> actionTypes, 
+			IActionFactory actionFactory, 
+			IAttackFactory attackFactory)
 	{
 		Heroes = heroes;
 		Monsters = monsters;
@@ -26,6 +36,8 @@ public class Battle : IBattle
 		_input = input;
 		_mode = mode;
 		_actionTypes = actionTypes;
+		_actionFactory = actionFactory;
+		_attackFactory = attackFactory;
 	}
 	private int HasWinner()
 	{
@@ -53,21 +65,18 @@ public class Battle : IBattle
 			result = _input.ReadLine();
 		}while(result == null && _actionTypes.Any(x => x != result));
 
-		return result;
-	}
-	private string DefaultTypeAction()
-	{
-		 return _actionTypes.FirstOrDefault()?.ToString();
+		return result!;
 	}
 	private void BattleModesMove(Party party, ICharacter character, Mode mode)
 	{
+		string actionType;
 		if (mode == Mode.HumanVsHuman || (mode == Mode.HumanVsComputer && party == Heroes))
 		{
-			string actionType = GetTypeAction();
-			party.Player.ChooseAction(this, character, actionType).Run(this, character);
+			actionType = GetTypeAction();
+			party.Player.ChooseAction(this, character,_actionFactory, actionType).Run(this, character);
 			return;
 		}
-		party.Player.ChooseAction(this, character, DefaultTypeAction()).Run(this, character);
+		party.Player.ChooseAction(this, character, _actionFactory, actionType = "Attack").Run(this, character);
 	}
 	private void PrintBattleStatus(Party party, Party enemy)
 	{

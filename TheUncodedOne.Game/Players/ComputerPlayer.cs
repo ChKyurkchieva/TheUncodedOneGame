@@ -16,10 +16,9 @@ public class ComputerPlayer : IPlayer
         _actions = actions;
 	}
 
-	public IAction ChooseAction(IBattle battle, ICharacter character, string typeAction)
+	public IAction ChooseAction(IBattle battle, ICharacter character, IActionFactory actionFactory, string actionType = "Attack")
     {
         Thread.Sleep(500);
-        IAction action = _actions.Find(x => x.ToString().Contains(typeAction)) ?? throw new NullReferenceException($"There is no such type action as {typeAction}");
-        return action;
+        return actionFactory.CreateAction(actionType);
     }
 }

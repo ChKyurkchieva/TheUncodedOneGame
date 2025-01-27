@@ -10,20 +10,23 @@ public class Game
 {
 	private List<Party> Monsters { get; set; }
 	private Party Heroes { get; set; }
-	//private int GameMode { get; set; }
 	private readonly IDisplay _display;
 	private readonly IInput _input;
 	private readonly List<string> _actionTypes;
 	private readonly List<IAction> _actions;
+	private readonly IActionFactory _actionFactory;
+	private readonly IAttackFactory _attackFactory;
 	private Mode Mode;
 
-	public Game(List<string> actionTypes, List<IAction> actions)
+	public Game(List<string> actionTypes, List<IAction> actions, IDisplay display, IInput input, IActionFactory actionFactory, IAttackFactory attackFactory)
 	{
-		_display = new ConsoleDisplay();
-		_input = new ConsoleInput();
+		_display = display;
+		_input = input;
 		_actionTypes = actionTypes;
 		Monsters = new List<Party>();
 		_actions = actions;
+		_actionFactory = actionFactory;
+		_attackFactory = attackFactory;
 	}
 	private void InitializePlayerName(Party heroes)
 	{
@@ -32,9 +35,9 @@ public class Game
 		{
 			_display.DisplayText("Choose your name: ", ConsoleColor.DarkCyan);
 			playerName = _input.ReadLine()!;
-			//_display.DisplayClear();
 		} while (playerName == null);
-		heroes.Characters.Add(new TrueProgrammer(playerName.ToUpper()));
+		playerName = playerName.ToUpper();
+		heroes.Characters.Add(new TrueProgrammer(playerName));
 	}
 
 	private void GameMode()
@@ -80,7 +83,7 @@ public class Game
 		for (int i = 0; i < Monsters.Count; i++)
 		{
 			_display.DisplayText("New battle begins!\n", ConsoleColor.Blue);
-			Battle battle = new Battle(Heroes, Monsters[i], _display, _input, Mode, _actionTypes);
+			Battle battle = new Battle(Heroes, Monsters[i], _display, _input, Mode, _actionTypes, _actionFactory, _attackFactory);
 			int result = battle.Run();
 			if (MonstersWin(result))
 			{
