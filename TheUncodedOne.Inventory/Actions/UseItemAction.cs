@@ -13,7 +13,7 @@ public class UseItemAction : IAction
 		_item = item;
 		_display = display;
 	}
-
+	public string Name { get; } = "UseItem";
 	public void Run(IBattle battle, ICharacter character)
 	{
 		_display.DisplayText($"{character.Name} was equiped with {_item.Name}");

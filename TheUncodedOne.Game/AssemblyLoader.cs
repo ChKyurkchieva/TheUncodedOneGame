@@ -4,19 +4,23 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TheUncodedOne.Contract.Interfaces;
 
 namespace TheUncodedOne.Game;
 
 internal class AssemblyLoader
 {
-	internal List<object> Load()
+	internal List<IBootstrapper> Load()
 	{
-		List<object> objects = new List<object>();
+		List<IBootstrapper> bootstrapers = new List<IBootstrapper>();
 		Assembly assembly = Assembly.LoadFrom("TheUncodedOne.Inventory.dll");
 
 		Type[] type = assembly.GetTypes();
 		foreach (Type t in type)
-			objects.Add(Activator.CreateInstance(t));
-		return objects;
+		{
+			if(t.IsAssignableTo(typeof(IBootstrapper)))
+				bootstrapers.Add((IBootstrapper?)Activator.CreateInstance(t) ?? throw new InvalidOperationException($"Failed to construct {t.Name}"));
+		}
+			return bootstrapers;
 	}
 }
