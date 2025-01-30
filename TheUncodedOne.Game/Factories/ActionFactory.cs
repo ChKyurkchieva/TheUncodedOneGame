@@ -19,7 +19,7 @@ public class ActionFactory : IActionFactory
 	{
 		var actions = _provider.GetServices<IAction>();
 
-		var action = actions.FirstOrDefault(a => a.GetType().Name.Contains(actionType, StringComparison.OrdinalIgnoreCase));
+		var action = actions.FirstOrDefault(a => a.Name.Contains(actionType, StringComparison.OrdinalIgnoreCase));
 		if (action == null) 
 			throw new InvalidOperationException($"No IAction implementation found for actionType: {actionType}");
 

@@ -16,6 +16,8 @@ public class Game
 	private readonly List<IAction> _actions;
 	private readonly IActionFactory _actionFactory;
 	private readonly IAttackFactory _attackFactory;
+	private IInventory heroesInventory;
+	private IInventory monstersInventory;
 	private Mode Mode;
 
 	public Game(List<string> actionTypes, List<IAction> actions, IDisplay display, IInput input, IActionFactory actionFactory, IAttackFactory attackFactory)
@@ -54,24 +56,24 @@ public class Game
 	{
 		if (Mode == Mode.HumanVsHuman) 
 		{
-			Heroes = new Party(new HumanoidPlayer(_display, _actions), _display);
-			Monsters.Add(new Party(new HumanoidPlayer(_display, _actions), _display));
+			Heroes = new Party(new HumanoidPlayer(_display, _actions), _display, heroesInventory);
+			Monsters.Add(new Party(new HumanoidPlayer(_display, _actions), _display, monstersInventory));
 			InitializePlayerName(Heroes);
 			InitializePlayerName(Monsters[0]);
 			return;	
 		}
 		if (Mode == Mode.HumanVsComputer)
-			Heroes = new Party(new HumanoidPlayer(_display, _actions), _display);
+			Heroes = new Party(new HumanoidPlayer(_display, _actions), _display, heroesInventory);
 
 		else
-			Heroes = new Party(new ComputerPlayer(_display, _actions), _display);
+			Heroes = new Party(new ComputerPlayer(_display, _actions), _display, heroesInventory);
 
-		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display));
+		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display, monstersInventory));
 		Monsters[0].Characters.Add(new Skeleton());
-		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display));
+		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display, monstersInventory));
 		Monsters[1].Characters.Add(new Skeleton());
 		Monsters[1].Characters.Add(new Skeleton ());
-		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display));
+		Monsters.Add(new Party(new ComputerPlayer(_display, _actions), _display, monstersInventory));
 		Monsters[2].Characters.Add(new TheUncodedOneCharacter());
 		InitializePlayerName(Heroes);
 	}

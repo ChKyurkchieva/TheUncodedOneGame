@@ -19,14 +19,16 @@ public class AttackAction : IAction
         _display = display;
         _input = input;
     }
-    public void Run(IBattle battle, ICharacter character)
+	public string Name { get; } = "AttackAction";
+
+	public void Run(IBattle battle, ICharacter character)
     {
         ICharacter target = battle.GetEnemyPartyFor(character).Characters[new Random().Next(battle.GetEnemyPartyFor(character).Characters.Count)];
         AttackType attackType = DefaultAttack(character);
         if((battle.GetMode() == BattleMode.HumanVsHuman || battle.GetMode() == BattleMode.HumanVsComputer ) && character is TrueProgrammer)
             attackType = ChooseAttack(character);
         IAttack attack = _attackFactory.CreateAttack(attackType);
-        _display.DisplayText($"{character.Name} " + $"{attack.Name} " + $"{target.Name}\n");
+        _display.DisplayText($"{character.Name} " + $"{attack.Name.ToUpperInvariant()} " + $"{target.Name}\n");
         AttackData data = attack.Create();
         target.HP -= data.Damage;
         _display.DisplayText($"{target.Name} is now at {target.HP}/{target.MaxHP} HP.\n");
@@ -48,15 +50,18 @@ public class AttackAction : IAction
             {
                 return attackType = DefaultAttack(character);
             }
-            switch (result) {
-                case "BoneCrunch": attackType = AttackType.BoneCrunch;
+            switch (result.ToLowerInvariant()) 
+            {
+                case "bonecrunch": attackType = AttackType.BoneCrunch;
 					break;
-                case "Punch": attackType = AttackType.Punch;
+                case "punch": attackType = AttackType.Punch;
                     break;
-                case "Unraveling": attackType = AttackType.Unraveling;
+                case "unraveling": attackType = AttackType.Unraveling;
                     break;
-                }
-		} while (result != AttackType.Punch.ToString() && result != AttackType.BoneCrunch.ToString() && result != AttackType.Unraveling.ToString());
+            }
+		} while (result.ToLowerInvariant() != AttackType.Punch.ToString().ToLowerInvariant() && 
+        result.ToLowerInvariant() != AttackType.BoneCrunch.ToString().ToLowerInvariant()
+        && result.ToLowerInvariant() != AttackType.Unraveling.ToString().ToLowerInvariant());
 
 		return attackType;
 	}

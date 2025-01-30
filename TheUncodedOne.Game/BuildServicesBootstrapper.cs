@@ -35,6 +35,7 @@ internal class BuildServicesBootstrapper : IBootstrapper
 		Services.AddTransient<IPlayer, HumanoidPlayer>();
 		Services.AddSingleton<IAttackFactory, AttackFactory>();
 		Services.AddTransient<List<IAction>>();
+		Services.AddTransient<IInventory, NullInventory>();
 		Services.AddSingleton<Game>();
 		
 	}

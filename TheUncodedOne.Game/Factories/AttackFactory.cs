@@ -15,7 +15,7 @@ public class AttackFactory : IAttackFactory
 	public IAttack? CreateAttack(AttackType attackType)
 	{
 		var attacks = _serviceProvider.GetServices<IAttack>();
-		var attack = attacks.FirstOrDefault(a => a.GetType().Name.Contains(attackType.ToString(), StringComparison.OrdinalIgnoreCase));
+		var attack = attacks.FirstOrDefault(a => a.Name.Contains(attackType.ToString(), StringComparison.OrdinalIgnoreCase));
 		if(attack == null)
 			throw new InvalidOperationException($"No IAction implementation found for actionType: {attackType.ToString()}");
 		return attack;
